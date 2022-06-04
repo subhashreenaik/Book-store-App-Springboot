@@ -1,0 +1,8 @@
+2022-05-31 08:49:48.290  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Starting BookstoreAppApplication using Java 17.0.2 on LAPTOP-JOB4074E with PID 50420 (C:\Users\91824\Documents\workspace-spring-tool-suite-4-4.14.1.RELEASE\BookstoreApp\target\classes started by 91824 in C:\Users\91824\Documents\workspace-spring-tool-suite-4-4.14.1.RELEASE\BookstoreApp)
+2022-05-31 08:49:48.291 DEBUG 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Running with Spring Boot v2.7.0, Spring v5.3.20
+2022-05-31 08:49:48.291  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : No active profile set, falling back to 1 default profile: "default"
+2022-05-31 08:49:48.722  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Started BookstoreAppApplication in 0.501 seconds (JVM running for 32921.776)
+2022-05-31 08:50:35.401  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Starting BookstoreAppApplication using Java 17.0.2 on LAPTOP-JOB4074E with PID 50420 (C:\Users\91824\Documents\workspace-spring-tool-suite-4-4.14.1.RELEASE\BookstoreApp\target\classes started by 91824 in C:\Users\91824\Documents\workspace-spring-tool-suite-4-4.14.1.RELEASE\BookstoreApp)
+2022-05-31 08:50:35.401 DEBUG 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Running with Spring Boot v2.7.0, Spring v5.3.20
+2022-05-31 08:50:35.401  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : No active profile set, falling back to 1 default profile: "default"
+2022-05-31 08:50:35.789  INFO 50420 --- [restartedMain] c.b.b.BookstoreAppApplication            : Started BookstoreAppApplication in 0.431 seconds (JVM running for 32968.843)

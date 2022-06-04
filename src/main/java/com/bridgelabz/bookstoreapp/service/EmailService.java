@@ -5,15 +5,18 @@ import java.util.Properties;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.bridgelabz.bookstoreapp.dto.ResponseDTO;
@@ -36,9 +39,9 @@ public class EmailService {
         properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         Authenticator authenticator = new Authenticator() {
-            
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-              
+                // TODO Auto-generated method stub
                 return new PasswordAuthentication(fromEmail, fromPwd);
             }
         };
@@ -58,15 +61,15 @@ public class EmailService {
 
             Transport.send(mail);
 
-            ResponseDTO responseDTO = new ResponseDTO(" Sent email ", mail, null);
+            ResponseDTO responseDTO = new ResponseDTO(" Sent email ", mail,null);
             return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 
-        } catch (Exception e) {
+        } catch (MessagingException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
-        ResponseDTO responseDTO = new ResponseDTO(" ERROR: Couldn't send email", null, null);
+        ResponseDTO responseDTO = new ResponseDTO(" ERROR: Couldn't send email", null,null);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

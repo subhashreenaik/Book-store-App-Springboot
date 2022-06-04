@@ -17,6 +17,7 @@ import com.bridgelabz.bookstoreapp.dto.CartDTO;
 import com.bridgelabz.bookstoreapp.dto.ResponseDTO;
 import com.bridgelabz.bookstoreapp.model.CartData;
 import com.bridgelabz.bookstoreapp.service.CartService;
+import com.bridgelabz.bookstoreapp.util.TokenUtil;
 
 @RestController
 @RequestMapping("/cart")
@@ -24,6 +25,9 @@ public class CartController {
 	
 	@Autowired
 	CartService cartservice;
+	
+	@Autowired
+	TokenUtil tokenutil;
 	
 	@PostMapping("/add_cart")
     public ResponseEntity<ResponseDTO> addToCart(@RequestBody CartDTO cartDTO) {
@@ -39,8 +43,9 @@ public class CartController {
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
 	
-	@GetMapping("/getbyid/{cartId}")
-    public ResponseEntity<ResponseDTO> getCartById(@PathVariable("cartId") int cartId) {
+	@GetMapping("/getbyid/{token}")
+    public ResponseEntity<ResponseDTO> getCartById(@PathVariable("cartId") String token) {
+		int cartId= tokenutil.decodeToken(token);
         CartData cartData = cartservice.getCartById(cartId);
         ResponseDTO responseDTO = new ResponseDTO("Get Cart call Success for Id", cartData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
@@ -52,8 +57,9 @@ public class CartController {
         ResponseDTO responseDTO = new ResponseDTO("Update quantity call success for Id", cartData);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
     }
-	@DeleteMapping("/delete_cart/{cartId}")
-    public ResponseEntity<ResponseDTO> deleteCart(@PathVariable("cartId") int cartId) {
+	@DeleteMapping("/delete_cart/{token}")
+    public ResponseEntity<ResponseDTO> deleteCart(@PathVariable("cartId") String token) {
+		int cartId= tokenutil.decodeToken(token);
 		cartservice.deleteCart(cartId);
         ResponseDTO responseDTO = new ResponseDTO("Delete call success for Id", "Deleted cart id : " + cartId);
         return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);

@@ -46,13 +46,16 @@ public class UserData {
 		this.email = dto.email;
 		this.address = dto.address;
 		this.password = dto.password;
-		this.verified=dto.verified;
+		
 	}
 	public UserData() {
 		
 	}
-	public void setVerified(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	public void setVerified(boolean verified) {
+        this.verified = verified;
+    }
+    public boolean getVerified() {
+        return verified;
+    }
 }

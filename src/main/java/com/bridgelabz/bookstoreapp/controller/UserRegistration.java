@@ -20,6 +20,7 @@ import com.bridgelabz.bookstoreapp.dto.ResponseDTO;
 import com.bridgelabz.bookstoreapp.dto.UserdataDTO;
 import com.bridgelabz.bookstoreapp.model.UserData;
 import com.bridgelabz.bookstoreapp.service.UserDataService;
+import com.bridgelabz.bookstoreapp.util.TokenUtil;
 
 
 @RestController
@@ -29,6 +30,8 @@ public class UserRegistration {
 	@Autowired
 	UserDataService service;
 	
+	@Autowired
+	TokenUtil tokenutil;
 	
 	
 	@GetMapping("/getAll")
@@ -41,10 +44,15 @@ public class UserRegistration {
      return service.createAccount(userDto);
     }
 
-   @GetMapping("/getById/{id}")
-    public UserData getById(@PathVariable int id){
+   @GetMapping("/getById/{token}")
+    public UserData getById(@PathVariable String token){
+	   int id= tokenutil.decodeToken(token);
         return service.getUserDataById(id);
     }
+   @GetMapping("/getByEmailId/{emailid}")
+   public Optional<UserData> getByEmailId(@PathVariable String emailid){
+       return service.getByEmailId(emailid);
+   }
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDto){
@@ -56,8 +64,8 @@ public class UserRegistration {
    public ResponseEntity<ResponseDTO> forgotPwd( @RequestBody ForgotPwdDTO forgotPWDDto){
    return service.forgotPwd(forgotPWDDto);
    }
-   @GetMapping("/verify")
-    public ResponseEntity<ResponseDTO> verifyUser(@RequestHeader("token") String token) {
+   @GetMapping("/verify/{token}")
+    public ResponseEntity<ResponseDTO> verifyUser(@PathVariable("token") String token) {
        return service.verify(token);
     }
 }

@@ -76,10 +76,9 @@ public class UserDataService {
 
 
 	    
+
 	    public ResponseEntity<ResponseDTO> verify(String token) {
-	    	
-	        Optional<UserData> user=repo.findById(Math.toIntExact(tokenUtil.decodeToken(token)));
-	        
+	        Optional<UserData> user=repo.findById(tokenUtil.decodeToken(token));
 	        if (user.isEmpty()) {
 	        	ResponseDTO responseDTO = new ResponseDTO("ERROR: Invalid token", null, token);
 	            return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.UNAUTHORIZED);
@@ -89,7 +88,6 @@ public class UserDataService {
 	        ResponseDTO responseDTO = new ResponseDTO(" The user has been verified ", user, token);
 	        return new ResponseEntity<ResponseDTO>(responseDTO, HttpStatus.OK);
 	    }
-
 	    
 	    public ResponseEntity<ResponseDTO> loginUser(LoginDTO dto){
 	       Optional<UserData> user=repo.findByEmail(dto.getEmail());
@@ -106,6 +104,12 @@ public class UserDataService {
 	        }
 
 	    }
+
+
+		public Optional<UserData> getByEmailId(String emailid) {
+			
+			return repo.findByEmail(emailid);
+		}
 
 
 	}
